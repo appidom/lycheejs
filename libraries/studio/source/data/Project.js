@@ -143,13 +143,7 @@ lychee.define('studio.data.Project').exports(function(lychee, global, attachment
 
 	};
 
-	const _write_package = function() {
-
-		// TODO: Implement write package
-
-	};
-
-	const _read_package = function() {
+	const _parse_package = function() {
 
 		let environments = this.config.buffer.build.environments;
 		let platforms    = Object.keys(this.platforms);
@@ -159,7 +153,7 @@ lychee.define('studio.data.Project').exports(function(lychee, global, attachment
 		for (let p = 0, pl = platforms.length; p < pl; p++) {
 
 			let platform = platforms[p];
-            let settings = environments[platform + '/' + id];
+			let settings = environments[platform + '/' + id];
 
 			if (settings instanceof Object) {
 
@@ -256,7 +250,7 @@ lychee.define('studio.data.Project').exports(function(lychee, global, attachment
 			this.config.onload = function() {
 
 				if (this.buffer instanceof Object) {
-					_read_package.call(that);
+					_parse_package.call(that);
 				}
 
 			};

@@ -166,74 +166,6 @@
 					"index": [
 						"js"
 					]
-				},
-				"main": {
-					"core": [
-						"js"
-					],
-					"index": [
-						"js"
-					]
-				},
-				"main-linux": {
-					"arm": {
-						"core": [
-							"js"
-						],
-						"index": [
-							"js"
-						]
-					},
-					"x86": {
-						"core": [
-							"js"
-						],
-						"index": [
-							"js"
-						]
-					},
-					"x86_64": {
-						"core": [
-							"js"
-						],
-						"index": [
-							"js"
-						]
-					}
-				},
-				"main-osx": {
-					"x86_64": {
-						"core": [
-							"js"
-						],
-						"index": [
-							"js"
-						]
-					}
-				},
-				"main-windows": {
-					"x86": {
-						"core": [
-							"js"
-						],
-						"harvester": [
-							"cmd"
-						],
-						"index": [
-							"js"
-						]
-					},
-					"x86_64": {
-						"core": [
-							"js"
-						],
-						"harvester": [
-							"cmd"
-						],
-						"index": [
-							"js"
-						]
-					}
 				}
 			},
 			"node-sdl": {
@@ -243,7 +175,8 @@
 					]
 				}
 			}
-		}
+		},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -255,9 +188,6 @@
 				"js"
 			],
 			"data": {
-				"Filesystem": [
-					"js"
-				],
 				"Package": [
 					"js"
 				],
@@ -272,16 +202,10 @@
 				"Beautifier": [
 					"js"
 				],
-				"Fertilizer": [
-					"js"
-				],
 				"Harvester": [
 					"js"
 				],
 				"Packager": [
-					"js"
-				],
-				"Server": [
 					"js"
 				]
 			},
@@ -343,8 +267,32 @@
 						"js"
 					]
 				}
+			},
+			"platform": {
+				"node": {
+					"data": {
+						"Filesystem": [
+							"js"
+						]
+					},
+					"mod": {
+						"Fertilizer": [
+							"js"
+						],
+						"Server": [
+							"js"
+						],
+						"Strainer": [
+							"js"
+						]
+					}
+				}
 			}
 		},
-		"tags": {}
+		"tags": {
+			"platform": {
+				"node": "platform/node"
+			}
+		}
 	}
 }

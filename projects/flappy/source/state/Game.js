@@ -2,18 +2,18 @@
 lychee.define('game.state.Game').requires([
 	'lychee.math.Mersenne',
 	'lychee.ui.entity.Label',
+	'game.app.sprite.Goal',
+	'game.app.sprite.Plane',
 	'game.effect.Explosion',
-	'game.entity.Goal',
-	'game.entity.Plane',
 	'game.ui.sprite.Background'
 ]).includes([
 	'lychee.app.State'
 ]).exports(function(lychee, global, attachments) {
 
 	const _Explosion  = lychee.import('game.effect.Explosion');
-	const _Goal       = lychee.import('game.entity.Goal');
+	const _Goal       = lychee.import('game.app.sprite.Goal');
 	const _Mersenne   = lychee.import('lychee.math.Mersenne');
-	const _Plane      = lychee.import('game.entity.Plane');
+	const _Plane      = lychee.import('game.app.sprite.Plane');
 	const _State      = lychee.import('lychee.app.State');
 	const _BLOB       = attachments["json"].buffer;
 
@@ -189,11 +189,11 @@ lychee.define('game.state.Game').requires([
 					let height = renderer.height;
 
 
-					entity = this.queryLayer('bg', 'background');
+					entity = this.query('bg > background');
 					entity.trigger('reshape', [ null, null, width, height ]);
 					this.__cache.background = entity;
 
-					entity = this.queryLayer('ui', 'info');
+					entity = this.query('ui > info');
 					entity.setPosition({
 						y: -1 / 2 * height + 32
 					});

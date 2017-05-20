@@ -40,7 +40,8 @@
 				"variant": "application"
 			}
 		},
-		"files": {}
+		"files": {},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -48,18 +49,20 @@
 			"Main": [
 				"js"
 			],
-			"entity": {
-				"Ball": [
-					"js",
-					"json",
-					"png"
-				],
-				"Paddle": [
-					"evil.png",
-					"good.png",
-					"js",
-					"json"
-				]
+			"app": {
+				"sprite": {
+					"Ball": [
+						"js",
+						"json",
+						"png"
+					],
+					"Paddle": [
+						"evil.png",
+						"good.png",
+						"js",
+						"json"
+					]
+				}
 			},
 			"state": {
 				"Game": [

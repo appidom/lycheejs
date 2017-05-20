@@ -61,7 +61,8 @@
 				"profile": {}
 			}
 		},
-		"files": {}
+		"files": {},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -72,7 +73,10 @@
 			"app": {
 				"entity": {
 					"Cell": [
-						"js"
+						"immune.fnt",
+						"js",
+						"neutral.fnt",
+						"virus.fnt"
 					],
 					"Unit": [
 						"attack.snd",
@@ -96,6 +100,9 @@
 				}
 			},
 			"state": {
+				"Game": [
+					"js"
+				],
 				"Menu": [
 					"js",
 					"json"

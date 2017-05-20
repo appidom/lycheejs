@@ -109,7 +109,8 @@
 					"js"
 				]
 			}
-		}
+		},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -180,6 +181,9 @@
 					"order.fnt"
 				],
 				"Entity": [
+					"js"
+				],
+				"Flow": [
 					"js"
 				],
 				"Jukebox": [
@@ -503,6 +507,11 @@
 						}
 					}
 				},
+				"html-webview": {
+					"bootstrap": [
+						"js"
+					]
+				},
 				"node": {
 					"Input": [
 						"js"
@@ -550,6 +559,11 @@
 							]
 						}
 					}
+				},
+				"node-sdl": {
+					"bootstrap": [
+						"js"
+					]
 				}
 			},
 			"policy": {

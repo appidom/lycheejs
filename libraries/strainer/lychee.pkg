@@ -54,11 +54,16 @@
 					]
 				}
 			}
-		}
+		},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
-		"tags": {},
+		"tags": {
+			"platform": {
+				"node": "platform/node"
+			}
+		},
 		"files": {
 			"Main": [
 				"js"
@@ -82,11 +87,17 @@
 					"json"
 				]
 			},
+			"platform": {
+				"node": {
+					"plugin": {
+						"ESLINT": [
+							"js"
+						]
+					}
+				}
+			},
 			"plugin": {
 				"API": [
-					"js"
-				],
-				"ESLINT": [
 					"js"
 				]
 			}

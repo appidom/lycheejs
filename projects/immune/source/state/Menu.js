@@ -21,13 +21,13 @@ lychee.define('game.state.Menu').requires([
 
 	const _move_unit = function(id, position, delta) {
 
-		let unit = this.queryLayer('game', 'unit');
+		let unit = this.query('game > unit');
 		if (unit !== null && unit.isIdle()) {
 
 			let cells = [
-				this.queryLayer('game', 'immune'),
-				this.queryLayer('game', 'virus'),
-				this.queryLayer('game', 'neutral')
+				this.query('game > immune'),
+				this.query('game > virus'),
+				this.query('game > neutral')
 			].filter(function(cell) {
 				return cell !== null;
 			});
@@ -111,18 +111,18 @@ lychee.define('game.state.Menu').requires([
 						let dim    = Math.min(width, height);
 
 
-						entity            = this.queryLayer('game', 'immune');
-						entity.radius     = dim / 6;
+						entity            = this.query('game > immune');
+						entity.radius     = (dim / 6) | 0;
 						entity.position.x = -1 / 2 * width  + entity.radius + dim / 16;
 						entity.position.y = -1 / 2 * height + entity.radius + dim / 16;
 
-						entity            = this.queryLayer('game', 'virus');
-						entity.radius     = dim / 6;
+						entity            = this.query('game > virus');
+						entity.radius     = (dim / 6) | 0;
 						entity.position.x = 1 / 2 * width  - entity.radius - dim / 16;
 						entity.position.y = 1 / 2 * height - entity.radius - dim / 16;
 
-						entity            = this.queryLayer('game', 'neutral');
-						entity.radius     = dim / 10;
+						entity            = this.query('game > neutral');
+						entity.radius     = (dim / 8) | 0;
 						entity.position.x = -1 / 4 * dim;
 						entity.position.y =  1 / 4 * dim;
 
@@ -131,6 +131,13 @@ lychee.define('game.state.Menu').requires([
 				}, this);
 
 			}
+
+
+			let immune = this.query('game > immune');
+			let virus  = this.query('game > virus');
+
+			immune.health = 20;
+			virus.health  = 20;
 
 		},
 

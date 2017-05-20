@@ -53,6 +53,9 @@ lychee.define('harvester.mod.Packager').requires([
 		json.build.files  = _sort_recursive(json.build.files);
 		json.source.files = _sort_recursive(json.source.files);
 
+		json.build.tags   = _walk_tags(json.build.files);
+		json.source.tags  = _walk_tags(json.source.files);
+
 
 		return {
 			api:    json.api,
@@ -84,6 +87,24 @@ lychee.define('harvester.mod.Packager').requires([
 
 	};
 
+	const _walk_tags = function(files) {
+
+		let tags = {};
+
+		if (files.platform instanceof Object) {
+
+			tags.platform = {};
+
+			for (let id in files.platform) {
+				tags.platform[id] = 'platform/' + id;
+			}
+
+		}
+
+		return tags;
+
+	};
+
 	const _walk_directory = function(pointer, path) {
 
 		let that = this;
@@ -100,12 +121,12 @@ lychee.define('harvester.mod.Packager').requires([
 				// Music and Sound asset have a trailing mp3 or ogg
 				// extension which is dynamically chosen at runtime
 				let ext = attachment.split('.').pop();
-				if (/mp3|ogg/.test(ext)) {
+				if (/(mp3|ogg)$/.test(ext)) {
 					attachment = attachment.split('.').slice(0, -1).join('.');
 					ext        = attachment.split('.').pop();
 				}
 
-				if (/msc|snd|js|json|fnt|png|md|tpl/.test(ext) || path.substr(0, 7) === '/source') {
+				if (/(msc|snd|js|json|fnt|png|md|tpl)$/.test(ext) || path.substr(0, 7) === '/source') {
 
 					if (pointer[identifier] instanceof Array) {
 
@@ -187,6 +208,7 @@ lychee.define('harvester.mod.Packager').requires([
 				let blob = JSON.stringify(data, null, '\t');
 				if (blob !== null) {
 					project.filesystem.write('/lychee.pkg', blob);
+					project.package = null;
 					project.package = new _Package(new Buffer(blob, 'utf8'));
 				}
 

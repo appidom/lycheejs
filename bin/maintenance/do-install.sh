@@ -292,6 +292,37 @@ else
 
 		fi;
 
+
+		if [ -d /usr/share/bash-completion/completions ]; then
+
+			echo " (L) ";
+			echo " (L) > Integrating CLI autocompletions ...";
+
+			cp ./bin/helper-autocomplete.sh /usr/share/bash-completion/completions/lycheejs;
+
+			rm /usr/share/bash-completion/completions/lycheejs-breeder    2> /dev/null;
+			rm /usr/share/bash-completion/completions/lycheejs-fertilizer 2> /dev/null;
+			rm /usr/share/bash-completion/completions/lycheejs-harvester  2> /dev/null;
+			rm /usr/share/bash-completion/completions/lycheejs-strainer   2> /dev/null;
+
+			ln -s /usr/share/bash-completion/completions/lycheejs /usr/share/bash-completion/completions/lycheejs-breeder;
+			ln -s /usr/share/bash-completion/completions/lycheejs /usr/share/bash-completion/completions/lycheejs-fertilizer;
+			ln -s /usr/share/bash-completion/completions/lycheejs /usr/share/bash-completion/completions/lycheejs-harvester;
+			ln -s /usr/share/bash-completion/completions/lycheejs /usr/share/bash-completion/completions/lycheejs-strainer;
+
+			echo -e "\e[42m\e[97m (I) > SUCCESS \e[0m";
+
+		elif [ -d /etc/bash_completion.d ]; then
+
+			echo " (L) ";
+			echo " (L) > Integrating CLI autocompletions ...";
+
+			cp ./bin/helper-autocomplete.sh /etc/bash_completion.d/lycheejs;
+
+			echo -e "\e[42m\e[97m (I) > SUCCESS \e[0m";
+
+		fi;
+
 	elif [ "$OS" == "osx" ]; then
 
 		echo " (L) ";
@@ -334,6 +365,17 @@ else
 			ln -s "$LYCHEEJS_ROOT/libraries/strainer/bin/strainer.sh"     /usr/local/bin/lycheejs-strainer;
 			ln -s "$LYCHEEJS_ROOT/libraries/studio/bin/studio.sh"         /usr/local/bin/lycheejs-studio;
 
+
+			echo -e "\e[42m\e[97m (I) > SUCCESS \e[0m";
+
+		fi;
+
+		if [ -d /etc/bash_completion.d ]; then
+
+			echo " (L) ";
+			echo " (L) > Integrating CLI autocompletions ...";
+
+			cp ./bin/helper-autocomplete.sh /etc/bash_completion.d/lycheejs;
 
 			echo -e "\e[42m\e[97m (I) > SUCCESS \e[0m";
 

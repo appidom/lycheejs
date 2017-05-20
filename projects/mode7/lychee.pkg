@@ -59,7 +59,8 @@
 				"variant": "application"
 			}
 		},
-		"files": {}
+		"files": {},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -76,11 +77,15 @@
 			"Renderer": [
 				"js"
 			],
-			"entity": {
-				"Background": [
-					"js",
-					"png"
-				],
+			"app": {
+				"entity": {
+					"Background": [
+						"js",
+						"png"
+					]
+				}
+			},
+			"level": {
 				"Track": [
 					"circuit.json",
 					"js",

@@ -87,7 +87,8 @@
 				"variant": "application"
 			}
 		},
-		"files": {}
+		"files": {},
+		"tags": {}
 	},
 	"source": {
 		"environments": {},
@@ -95,7 +96,16 @@
 			"Main": [
 				"js"
 			],
-			"entity": {
+			"net": {
+				"Client": [
+					"js",
+					"json"
+				],
+				"Server": [
+					"js"
+				]
+			},
+			"sprite": {
 				"Airlock": [
 					"js",
 					"json",
@@ -129,15 +139,6 @@
 					"js",
 					"json",
 					"png"
-				]
-			},
-			"net": {
-				"Client": [
-					"js",
-					"json"
-				],
-				"Server": [
-					"js"
 				]
 			},
 			"state": {
