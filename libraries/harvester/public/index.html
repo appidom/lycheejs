@@ -49,29 +49,48 @@ cd /opt/lycheejs;
 	</p>
 </article>
 
-<main><!-- PROJECTS --></main>
+<main id="main"><!-- LIBRARIES AND PROJECTS --></main>
 
 <script>
-(function(global, version, message, main) {
+(function(global) {
+
+	/*
+	 * HELPERS
+	 */
 
 	const $ = function(name) {
 
-		let tmp  = name.split(/\.|\[|\]/g).filter(v => v !== '');
-		let el   = global.document.createElement(tmp[0]);
-		let wrap = { _el: el };
+		let el = null;
 
-		tmp[1] && (el.className = tmp[1]);
+		if (name.startsWith('#')) {
+			el = global.document.querySelector(name);
+		} else {
+			let tmp = name.split(/\.|\[|\]/g).filter(v => v !== '');
+			el = global.document.createElement(tmp[0]);
+			tmp[1] && (el.className = tmp[1]);
+		}
 
-		wrap.html     = a => (el.innerHTML = a, wrap);
-		wrap.append   = a => ((a._el && el.appendChild(a._el)) || el.appendChild(a), wrap);
-		wrap.appendTo = b => ((b._el && b._el.appendChild(el)) || b.appendChild(el), wrap);
-		wrap.onclick  = c => (el.onclick = _ => (c(), false), wrap);
-		wrap.set      = o => {
-			for (let i in o) (typeof wrap[i] === 'function' && wrap[i](o[i])) || el.setAttribute(i, o[i]);
+
+		if (el !== null) {
+
+			let wrap = { _el: el };
+
+			wrap.state    = a => (el.className = a, wrap);
+			wrap.html     = a => (el.innerHTML = a, wrap);
+			wrap.append   = a => ((a._el && el.appendChild(a._el)) || el.appendChild(a), wrap);
+			wrap.appendTo = b => ((b._el && b._el.appendChild(el)) || b.appendChild(el), wrap);
+			wrap.onclick  = c => (el.onclick = _ => (c(), false), wrap);
+			wrap.set      = o => {
+				for (let i in o) (typeof wrap[i] === 'function' && wrap[i](o[i])) || el.setAttribute(i, o[i]);
+				return wrap;
+			};
+
 			return wrap;
-		};
 
-		return wrap;
+		}
+
+
+		return null;
 
 	};
 
@@ -124,41 +143,34 @@ cd /opt/lycheejs;
 
 	};
 
-	const HOST = (function(location) {
-
-		if (typeof location.hostname === 'string') {
-			return location.hostname;
-		}
-
-		return null;
-
-	})(global.location || {});
 
 
-	if (version !== null && message !== null) {
+	/*
+	 * IMPLEMENTATION
+	 */
 
-		version.innerHTML = lychee.VERSION;
+	const version = $('#lychee-VERSION');
+	const message = $('#lychee-MESSAGE');
+
+	if (version !== null) {
+		version.html('' + lychee.VERSION);
+	}
+
+	if (message !== null) {
 
 		let install_year  = parseInt(lychee.VERSION.split('-')[0], 10);
 		let install_month = parseInt(lychee.VERSION.split('-Q')[1], 10) * 3;
 		let current_year  = new Date().getFullYear();
 		let current_month = ((new Date().getMonth() / 3) | 0) * 3;
 
-
-		let needs_update = false;
-
-		if (install_year === current_year && current_month > install_month) {
-			needs_update = true;
-		}
-
-		if (install_year < current_year && current_month > 0) {
-			needs_update = true;
-		}
-
-		if (needs_update === true) {
+		if ((
+			install_year === current_year && current_month > install_month
+		) || (
+			install_year < current_year && current_month > 0
+		)) {
 
 			setTimeout(function() {
-				message.className = 'visible';
+				message.state('visible');
 			}, 500);
 
 		}
@@ -166,10 +178,13 @@ cd /opt/lycheejs;
 	}
 
 
+	const main = $('#main');
+
 	if (main !== null) {
 
-		let config1 = new Config('http://' + HOST + ':4848/api/library/index');
-		let config2 = new Config('http://' + HOST + ':4848/api/project/index');
+		let host    = global.location.hostname || 'localhost';
+		let config1 = new Config('http://' + host + ':4848/api/library/index');
+		let config2 = new Config('http://' + host + ':4848/api/project/index');
 
 		config1.onload = function(result) {
 
@@ -192,7 +207,7 @@ cd /opt/lycheejs;
 
 	}
 
-})(typeof global !== 'undefined' ? global : this, document.querySelector('#lychee-VERSION'), document.querySelector('#lychee-MESSAGE'), document.querySelector('main'));
+})(typeof global !== 'undefined' ? global : this);
 </script>
 </body>
 </html>
